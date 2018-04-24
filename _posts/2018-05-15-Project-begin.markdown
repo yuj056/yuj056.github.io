@@ -1,0 +1,7 @@
+---
+layout: post
+title: "Accepted to GSoC"
+date: 2018-04-24 
+---
+
+I am pleased to be accepted for GSoC 2018mwith NumFOCUS. This summer, I will put a lot effort on my project called implement a plug flow reactor with surface chemistry. I hope I can get along with my four mentors well and complete some cool stuff at the end of this intern.

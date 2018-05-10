@@ -1,0 +1,3 @@
+During the community bonding time, my mentors are really helpful to deal with my visa problem and answer my questions about Cantera.I reviewed C++ language by myself and knowed the Cantera code - How the code is organized, Where different parts of
+the code are located, and h. How to make modifications to the code and then push them back to the repository via git. Come up with an outline for my GSoC project: what will need to create any new files, What variable names in the code correspond to the variables in my governing equations?
+It is fun and challenging. I hope I can have a productive summer :)

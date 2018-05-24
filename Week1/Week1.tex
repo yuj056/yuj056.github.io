@@ -1,0 +1,295 @@
+% this TeX file provides an awesome example of how TeX will make super 
+% awesome tables, at the cost of your of what happens when you try to make a
+% table that is very complicated.
+% Originally turned in for Dr. Nico's Security Class
+\documentclass[11pt]{article}
+
+
+% Use wide margins, but not quite so wide as fullpage.sty
+\marginparwidth 0.5in 
+\oddsidemargin 0.25in 
+\evensidemargin 0.25in 
+\marginparsep 0.25in
+\topmargin 0.25in 
+\textwidth 6in \textheight 8 in
+% That's about enough definitions
+
+% multirow allows you to combine rows in columns
+\usepackage{multirow}
+% tabularx allows manual tweaking of column width
+\usepackage{tabularx}
+% longtable does better format for tables that span pages
+\usepackage{longtable}
+%make nomenclature
+\usepackage{nomencl}
+\makenomenclature
+%make strikethrough cancel
+\usepackage{cancel}
+%for symbol of perimeter
+\usepackage{mathrsfs}
+%boxed
+\usepackage{amsmath}
+%add reference
+\usepackage{biblatex}
+\addbibresource{mybibliography.bib}
+
+\begin{document}
+% this is an alternate method of creating a title
+%\hfill\vbox{\hbox{Gius, Mark}
+%       \hbox{Cpe 456, Section 01}  
+%       \hbox{Lab 1}    
+%       \hbox{\today}}\par
+%
+%\bigskip
+%\centerline{\Large\bf Lab 1: Security Audit}\par
+%\bigskip
+\author{Yuanjie Jiang}
+\title{Week 1: Derivation of Governing Equations and Constraints for Plug Flow with Variable Area and Surface Chemistry}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%section 1 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+\section{Assumptions}
+\begin{itemize}
+    \item Area variation is sufficiently small and smooth
+    \item No variation across channel, so it is a 1D problem
+    \item Neglecting the axial diffusion compared to the convective term in flow direction (z-axis)
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section 2
+\section{Governing Equations and Constraints}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mass conservation equation%%%%%%%%%%%%%%%%%%%%
+\subsection{Overall mass conservation equation}
+The change of the mass flow rate of gas equals the generation/consumption rate by surface reaction, the equation is written as below\cite{kee2005chemically}:
+\begin{equation}
+    \frac{dm}{dt} = \int_{cs} \sum^{K_g} \dot s_k W_k dA
+\end{equation}
+Based on the Reynolds transport theorem, the LHS of the above equation can be expanded. The time differential term can be canceled since only steady state (s.s.) is considered.
+\begin{equation}
+    \cancelto{〈s.s〉}{〈\int_{cv}\frac{\partial \rho}{\partial t}dV〉} + \int_{cs} \rho (\textbf{v} \cdot \textbf{n})dA = \int_{cs}\sum^{Kg}\dot{s_k}W_kdA
+\end{equation}
+Gauss theorem cannot be applied to convert the control surface integration to control volume integration since the cross-section area of the reactor is changing.Taylor expansion is applied instead.
+\begin{equation}
+    -\rho u A_c + \rho u A_c + \frac{\rho u A_c}{dz}dz = \sum^{K_g}\dot{s_k}W_k\mathscr{P}'dz
+\end{equation}
+\begin{equation}
+    \boxed{\frac{d(\rho u A_c)}{dz} = \mathscr{P}'\sum^{K_g}\dot{s_k}W_k}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%species conservation%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Individual species conservation equation}
+Similar procedure is taken to derive the species conservation equation.
+\begin{equation}
+    \frac{dm_k}{dt} = \int_{cv}\dot\omega_k W_k dV + \int_{cs}\dot{s_k}W_kdA
+\end{equation}
+\begin{equation}
+     \cancelto{〈s.s〉}{〈\int_{cv}\frac{\partial \rho Y_k}{\partial t}dV〉} + \int_{cs} \rho Y_k (\textbf{v} \cdot \textbf{n})dA = \int_{cv}\dot\omega_kW_kdV + \int_{cs}\dot{s_k}W_kdA
+\end{equation}
+\begin{equation}
+    -\rho Y_k u A_c + \rho Y_k u A_c + \frac{\rho Y_k u A_c}{dz}dz = \dot \omega_kW_kA_c dz +\dot{s_k}W_k\mathscr{P}'dz
+\end{equation}
+\begin{equation}
+    \frac{d(\rho Y_k u A_c)}{dz} = \dot{\omega_k}W_kA_c+\mathscr{P}'\dot{s_k}W_k
+\end{equation}
+\begin{equation}
+    \rho u A_c\frac{dY_k}{dz} + Y_k\frac{d(\rho u A_c)}{dz} = \dot{\omega_k}W_kA_c + \dot{s_k}W_k\mathscr{P}'
+\end{equation}
+Incorporated with Eq.(4) into the second term of Eq. (9)
+\begin{equation}
+   \boxed{ \rho u A_c\frac{dY_k}{dz} + Y_k\mathscr{P}'\sum^{K_g}\dot{s_k}W_k = \dot{\omega_k}W_kA_c + \dot{s_k}W_k\mathscr{P}'}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%energy balance equation
+\subsection{Energy balance equation}
+According to the first law of thermodynamics, the total stored energy change equals the sum of the heat transfer into the system and the work done by the system \cite{kee2005chemically,larson1996plug}.
+\begin{equation}
+    \frac{dE_t}{dt} = \frac{dQ}{dt} + \frac{dW}{dt}
+\end{equation}
+\begin{equation}
+    \int_{cv}\rho \frac{\partial e_t}{\partial t} + \rho \textbf{v}\cdot \nabla e_t dV = \int_{cv}\rho \frac{De_t}{Dt}dV  =\int_{cv}\rho(\frac{De}{Dt}+\textbf{v}\frac{D\textbf{v}}{Dt})dV=\frac{dQ}{dt} + \frac{dW}{dt}
+\end{equation}
+\begin{equation}
+    \cancelto{〈s.s〉}{\int_{cv}\rho\frac{\partial e}{\partial t}}+\rho \textbf{v}\nabla e +\cancelto{〈s.s〉}{\rho\textbf{v}\frac{\partial \textbf{v}}{\partial t}} + \rho \textbf{v} \textbf{v}\nabla \textbf{v} dV = \frac{dQ}{dt} - \cancelto{〈s.s〉}{\int_{cv}\frac{\partial p}{\partial t}dV} - \int_{cs}p(\textbf{v}\cdot \textbf{n})dA
+\end{equation}
+\begin{equation}
+    \int_{cs}(e+\frac{v^2}{2}+\frac{p}{\rho})\rho \textbf{v}\cdot\textbf{n}dA = \frac{dQ}{dt}
+\end{equation}
+Applied Taylor expansion on the LHS of the equation and in conjunction with $h = e + \frac{p}{\rho}$
+\begin{equation}
+    -(h+\frac{u^2}{2})\rho u A_c + (h+\frac{u^2}{2})\rho u A_c + \frac{(h+\frac{u^2}{2})\rho u A_c}{dz}dz = \frac{dQ}{dt}
+\end{equation}
+\begin{equation}
+   \frac{d(h\rho u A_c)}{dz} + \frac{d(\frac{u^3}{2}\rho A_c)}{dz} = \frac{dQ}{dt}
+\end{equation}
+\begin{equation}
+    \rho u A_c \frac{dh}{dz} + h\frac{d(\rho u A_c)}{dz} + \rho u A_c\frac{d\frac{u^2}{2}}{dz} + \frac{u^2}{2}\frac{d(\rho u A_c)}{dz} = \frac{dQ}{dt}
+\end{equation}
+\begin{equation}
+    \rho u A_c \frac{dh}{dz} + (h+\frac{u^2}{2})\mathscr{P}'\sum^{K_g}\dot{s_k} W_k + \rho u A_c\frac{d\frac{u^2}{2}}{dz} = \frac{dQ}{dt}
+\end{equation}
+\begin{equation}
+    \rho u A_c \frac{d(\sum^{K_g} Y_k h_k)}{dz} + (h+\frac{u^2}{2})\mathscr{P}'\sum^{K_g}\dot{s_k} W_k + \rho u A_c\frac{d\frac{u^2}{2}}{dz} = \frac{dQ}{dt}
+\end{equation}
+Incorporated with $h_k = c_{p,k} T $, Eq. (10) can be rewritten into
+\begin{equation}
+    \rho u A_c c_p \frac{dT}{dz} + \rho u A_c \sum^{K_g}h_k\frac{dY_k}{dz}+\rho u^2 A_c \frac{du}{dz} +(h+\frac{u^2}{2})\mathscr{P}'\sum^{K_g}\dot{s_k} W_k= \frac{dQ}{dt} 
+\end{equation}
+\begin{equation}
+    \rho u A_c  (c_p\frac{dT}{dz} + \sum^{K_g}h_k\frac{dY_k}{dz}+u \frac{du}{dz}) +(\sum^{K_g}h_kY_k+\frac{u^2}{2})\mathscr{P}'\sum^{K_g}\dot{s_k} W_k= \frac{dQ}{dt} 
+\end{equation}
+Since kinetic energy of the flow is negligible, the above equation can be simplified.
+\begin{equation}
+    \rho u A_c c_p \frac{dT}{dz} + \rho u  A_c \sum^{Kg}h_k\frac{dY_k}{dz} + h\mathscr{P}'\sum^{K_g}\dot{s_k}{W_k} = \frac{dQ}{dt}
+\end{equation}
+The second term of the above equation can be simplified incorporated with species conservation equation (Eq. 10), which can be expressed as follows.
+\begin{equation}
+\begin{split}
+    \rho u A_c \sum^{K_g} h_k \frac{dY_k}{dz} = \sum^{K_g}\rho u A_ch_k \frac{dY_k}{dz} &= \sum^{K_g}h_k[\dot{\omega_k}W_kA_c + \dot{s_k}W_k\mathscr{P}' - Y_k\mathscr{P}'\sum^{K_g}\dot{s_k}W_k]\\
+    &= \sum^{K_g}h_k\dot{s_k}W_k\mathscr{P}'+ \sum^{K_g}h_k\dot{\omega_k}W_kA_c - \sum_{K_g}h_kY_k\mathscr{P}'\sum^{K_g}\dot{s_k}W_k\\
+    &= \cancel{\sum^{K_g}h_k\dot{s_k}W_k\mathscr{P}'}+ \sum^{K_g}h_k\dot{\omega_k}W_kA_c -
+    \cancel{\sum^{K_g}Y_k\sum^{K_g}h_k\dot{s_k}W_k\mathscr{P}'}
+\end{split}
+\end{equation}
+Plug Eq. (23) into Eq. (22)
+\begin{equation}
+\rho u A_c c_p \frac{dT}{dz} + A_c\sum^{K_g}\dot{\omega_k}W_kh_k + \mathscr{P}'\sum^{K_g}h_k\dot{s_k}{W_k} = \frac{dQ}{dt}
+\end{equation}
+The heat flow rate into the system has two expressions, one is due to the heat flux $\dot{q_e}$ from the surroundings to the outer tube wall (whose surface area per unit length is $a_e$) and accumulation of enthalpy in the bulk solid. The other is due to the $\dot{q_i}$ is the heat flux to the gas from the inner tube wall and accumulation of enthalpy in the surface species \cite{coltrin1991surface,larson1996plug}
+\begin{equation}
+\boxed{\begin{aligned}
+\rho u A_c c_p \frac{dT}{dz} + A_c\sum^{K_g}\dot{\omega_k}W_kh_k + \mathscr{P}'\sum^{K_g}h_k\dot{s_k}{W_k} &= a_e q_e - \mathscr{P}'\sum^{K_b}_{bulk} \dot{b_k}W_kh_k\\
+&=\mathscr{P}'q_i + \mathscr{P}'\sum_{gas}^{K_g}\dot{s_k}W_kh_k
+\end{aligned}}
+\end{equation}
+%%%%%%%%%%%%momentum equation
+\subsection{Momentum equation}
+The momentum conservation in the axial direction is presented as follows, which shows the balance between pressure force, inertia, viscous drag and momentum applied to the flow due to surface reactions\cite{kee2005chemically,larson1996plug}.
+\begin{equation}
+    \frac{d(m\textbf{v})}{dt} = \sum F
+\end{equation}
+\begin{equation}
+    \int_{cv}\rho \frac{D\textbf{v}}{dt}dV = -\int_{cs}pdA - \int_{cs}\tau_wdA
+\end{equation}
+\begin{equation}
+    \int_{cv}\rho (\cancelto{s.s}{\frac{\partial \textbf{v}}{\partial t}} + \textbf{v} \nabla\cdot \textbf{v}) =\int_{cs}\rho \textbf{v}\textbf{v}\cdot \textbf{n}dA = -\int_{cs}pdA - \int_{cs}\tau_wdA
+\end{equation}
+\begin{equation}
+    -\rho u^2A_c + \rho u^2A_c + \frac{d(\rho u^2A_c)}{dz}dz = pA_c - (pA_c+\frac{d(pA_c)}{dz}dz) - \tau_w\mathscr{P}dz
+\end{equation}
+\begin{equation}
+    \frac{d(\rho u^2A_c)}{dz} = -\frac{d(pA_c)}{dz} - \tau_w\mathscr{P}
+\end{equation}
+\begin{equation}
+    \rho u A_c\frac{du}{dz} + u\frac{\rho u A_c}{dz} = -\frac{d(pA_c)}{dz} - \tau_w\mathscr{P}
+\end{equation}
+\begin{equation}
+    \boxed{\rho u A_c\frac{du}{dz} + u\frac{\rho u A_c}{dz} = -\frac{d(pA_c)}{dz} - \frac{1}{2}\rho u^2f\mathscr{P}}
+\end{equation}
+where\[
+  f =
+  \begin{cases}
+                                   \frac{16}{Re} & laminar flow  \\
+                                    0.0791 Re^{-0.5} & turbulent flow
+
+  \end{cases}
+\]
+where $Re = \frac{uD\rho}{\mu}$, the dynamic viscosity $\mu$ is a time dependent variable, it can be roughly revised using $\mu = \mu_{in}(\frac{T}{T_{in}})^{0.5}$ without using any thermal data from input files.
+%%%%%%%%%%%%%%%%%%%%Idea gas equation of state
+\subsection{Idea gas equation of state}
+Pressure showed above  can be roughly obtained using the ideal gas equation of state:
+\begin{equation}
+    pW = \rho RT
+\end{equation}
+
+%%%%%%%%%%%%%%%algebraic constraints
+\subsection{Constraints}
+Since we assume the system is in steady state and surface composition at tube wall is stationary. Then the net production rates of surface species by heterogeneous reaction approach 0, which is given:
+\begin{equation}
+   \boxed{ \dot{s_k} = 0~~~(k = 1\cdot\cdot\cdot K_s-1)}
+\end{equation}
+All $\dot{s_k}$ are not independent, the following constraint can be used to replace Eq. (34) for the largest site fraction species.
+\begin{equation}
+   \boxed{ \sum_{k=1}^{K_s}Z_k = 1~~~(k = K_s)}
+\end{equation}
+Every points along the tube surface should satisfy these two constraints.
+For solving differential - algebraic equation, some software (e.g. DASSL) need all algebraic equations satisfy at the initial point. In order to obtain the initial value of $Z_k$ at steady state,the transient differential equation for the site fraction $Z_k$ of surface species k can be derived as follows\cite{bird2002transport}
+
+\begin{equation}
+    [X_k] = \frac{Z_k(n)\Gamma_n}{\sigma_k(n)} 
+\end{equation}
+\begin{equation}
+    \frac{d[X_k]}{dt} = \dot{s_k}
+\end{equation}
+\begin{equation}
+\frac{d(\frac{Z_k(n)\Gamma_n}{\sigma_k (n)})}{dt}= \dot{s_k}
+\end{equation}
+
+\begin{equation}
+    \frac{\Gamma_n}{\sigma_k(n)}\frac{dZ_k(n)}{dt} + \frac{Z_k(n)}{\sigma_k(n)}\frac{d\Gamma_n}{dt} = \dot{s_k}
+\end{equation}
+Assuming total surface site density ($\Gamma_n$) is constant. Then a simpler equation for $dZ_k(n)$ can be obtained.
+\begin{equation}
+    \frac{dZ_k}{dt} = \frac{\dot{s_k}\sigma_k}{\Gamma}
+\end{equation}
+
+Eq. (40) is conjunction with Eq. (35) until the steady state is reached.
+
+
+\subsection{Different boundary conditions}
+\begin{itemize}
+    \item If the reactor is isothermal or the axial temperature profile is specified, the energy balance equation will not use
+    \item Reactor is adiabatic ($q_e$ = 0) or $q_e(x)$ is specified.
+    \item $q_i(x)$ can be expressed in terms of function of ambient temperature $T_\infty$ and overall heat transfer coefficient $U$, which is given as $$q_i = U(T_\infty - T)$$
+    \item The heat transfer from the reactor wall is given in terms of the convection heat coefficient $\hat{h}$ and tube wall temperature $T_w$, which is given as $dQ/dt =  \hat{h}(\mathscr{P}dz)(Tw - T)$, then the energy equation can be further simplified based on Eq. (24) 
+\end{itemize}
+
+\newpage
+%\nomenclature{$$}{}
+\nomenclature{$m$}{total mass of the system}
+\nomenclature{$m_k$}{mass of species k}
+\nomenclature{$t$}{time}
+\nomenclature{$s_k$}{molar production rate by all surface reactions}
+\nomenclature{$\textbf{v}$}{the velocity vector of the flow}
+\nomenclature{$u$}{velocity in flow direction}
+\nomenclature{$A$}{area}
+\nomenclature{$A_c$}{cross-section area}
+\nomenclature{$z$}{flow direction}
+\nomenclature{$W_k$}{molecular weight of species k}
+\nomenclature{$\rho$}{density of the flow}
+\nomenclature{$K_g$}{total number of species in gas-phase}
+\nomenclature{$\mathscr{P}'$}{chemically active area per unit length}
+\nomenclature{$\dot{\omega_k}$}{molar production rate of species k}
+\nomenclature{$E_t$}{total stored energy}
+\nomenclature{$Q$}{heat transfer into the system}
+\nomenclature{$W$}{work done by the system}
+\nomenclature{$e_t$}{total stored energy per unit mass}
+\nomenclature{$c_p$}{mean heat capacity per unit mass of the gas}
+\nomenclature{$h_k$}{enthalpy of species k per unit mass of the gas}
+\nomenclature{$h$}{enthalpy per unit mass of the gas}
+\nomenclature{$q_e$}{heat flux from surroundings}
+\nomenclature{$q_i$}{heat flux from inner tube}
+\nomenclature{$a_e$}{outer tube wall surface area per unit length}
+\nomenclature{$\dot{b_k}$}{molar production rate for bulk solid}
+\nomenclature{$F$}{total force applied to the system}
+\nomenclature{$\tau_w$}{the shear stress}
+\nomenclature{$\mathscr{P}$}{The physical perimeter of the inner tube}
+\nomenclature{$f$}{the friction factor}
+\nomenclature{$Re$}{Reynolds number}
+\nomenclature{$\mu$}{dynamic viscosity}
+\nomenclature{$\mu_{in}$}{dynamic viscosity at inlet temperature}
+\nomenclature{$T$}{temperature of the flow}
+\nomenclature{$T_{in}$}{inlet temperature of the flow}
+\nomenclature{$R$}{the universal gas constant}
+\nomenclature{$Z_k$}{the site fraction of surface species k}
+\nomenclature{$X_k$}{the molar concentration of species k}
+\nomenclature{$\Gamma$}{total surface site density}
+\nomenclature{$\Gamma$}{density of surface sites of phase n}
+\nomenclature{$\sigma_k(n)$}{site occupancy number}
+\nomenclature{$U$}{overall heat transfer coefficient}
+\nomenclature{$\hat{h}$}{the convection heat transfer coefficient}
+
+\printnomenclature
+
+\printbibliography
+
+\end{document}

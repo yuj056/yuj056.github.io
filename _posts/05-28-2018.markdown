@@ -1,0 +1,2 @@
+# First period of coding
+I am Yuanjie, a Ph.D. candidate student in Mechanical and Aerosapce Engineering Department at University of California, San Diego. My research mainly focuses on computational studies of reactive flow. It's my pleasure to accepted by GSoC. Currently,I am working on the project called Implement a Plug Flow Reactor Model with Surface Chemistry. 

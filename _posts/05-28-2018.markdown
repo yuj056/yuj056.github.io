@@ -1,3 +1,4 @@
+![alt text](https://www.google.com/search?q=Cantera+logo&rlz=1C5CHFA_enUS717US717&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiuu8Pj187bAhURLX0KHSocCZAQ_AUICigB&biw=1597&bih=719#imgrc=z4GjQCcQfhw0zM:)
 # Conclusion of first period of work
-## Self Introduction 
+## 1. About me 
 I am Yuanjie, a Ph.D. candidate student in Mechanical and Aerosapce Engineering Department at University of California, San Diego. My research mainly focuses on computational studies of reactive flow. It's my pleasure to accepted by GSoC. Currently,I am working on the project called Implement a Plug Flow Reactor Model with Surface Chemistry. 

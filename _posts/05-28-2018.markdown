@@ -7,5 +7,5 @@ Tubular flow reactors have been widely applied to chemical process industries fo
 ## 3. The work has been done
 * The detailed derivation of governing equations and algebraic constraints can be reached via [my first week report](https://github.com/yuj056/yuj056.github.io/blob/master/Week1/yuj056_github_io.pdf). 
 * Lots of researches on Sundials IDA solver have been done for differential and algebraic equations (DAE) solving. To simplify the problem, isothermal tube with laminar flow reactor model has been tested at first comparing with the [results from Sundial's paper](https://github.com/yuj056/yuj056.github.io/blob/master/_posts/Sandia.pdf). The initial conditions at the boundary have been determined, especially the site fractions of the surface species have been calculated based on the facticious trasient equation of site fraction. The calculated initial conditions of the site fractions and first derivatives of the unknowns agree with the paper results well. The following figure shows the screenshot of part of the code, details can be seen [here](https://github.com/yuj056/yuj056.github.io/blob/master/model/Isothermal_1D_PFR_w_Surfchem.ipynb).
-![alt text](https://github.com/yuj056/yuj056.github.io)
+![alt text](https://github.com/yuj056/yuj056.github.io/blob/master/_posts/code.png)
 

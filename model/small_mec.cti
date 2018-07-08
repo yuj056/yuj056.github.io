@@ -1,0 +1,35 @@
+units(length = "cm", time = "s", quantity = "mol", act_energy = "kJ/mol")
+#----------------------
+#oxide surface
+#----------------------
+ideal_gas(name = "gas",
+elements = " H O",
+species = "gri30: H2O",
+transport = "Mix",
+initial_state = state( temperature = 900,
+pressure = OneAtm,
+mole_fractions = 'H2O:1'))
+
+ideal_interface(name = "oxide_surface",
+elements = "O  H",
+species = "(ox) H2O(ox)",
+site_density = 2.0e-9,
+phases = 'gas',
+reactions = 'oxide-*',
+initial_state = state( temperature = 900,
+coverages = "H2O(ox):0, (ox):1.0") )
+
+
+# A surface vacancy in the oxygen sublattice
+species( name = "(ox)", atoms = "",
+thermo = const_cp(h0 = (0.0, 'kJ/mol'),
+s0 = (0.0,'J/mol/K')))
+
+species( name = "H2O(ox)", atoms = "H:2, O:1",
+thermo = const_cp(h0 = (-265.0, 'kJ/mol'),
+s0 = (98.0,'J/mol/K')))
+
+# Desorption of physisorbed water. This is made fast.
+surface_reaction("H2O(ox) <=> H2O + (ox)",
+[1.0e14, 0.0, (0.0, 'kJ/mol')], id = "oxide-water")
+

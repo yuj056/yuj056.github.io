@@ -1,4 +1,5 @@
-# GSoC 2018 -- Implement a 1D plug flow reactor model with surface chemistry
+# GSoC 2018 
+## Implement a 1D plug flow reactor model with surface chemistry
 All the files of GSoC 2018 are included in this folder.
 ## The objectives of my project
 1. Derive the governing differential equations and algebraic constraints (DAE) for the 1D plug flow reactor with surface chemistry
